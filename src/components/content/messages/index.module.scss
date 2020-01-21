@@ -1,3 +1,27 @@
 .messages{
-
+  padding: 20px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'title' 'content';
+  height: 100%;
+  &__title{
+    font-size: 28px;
+    margin-bottom: 20px;
+    grid-area: title;
+  }
+  &__wrap{
+    grid-area: content;
+    display: grid;
+    grid-template-areas: 'users dialogs';
+    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 1fr;
+  }
+  &__users{
+    grid-area: users;
+    border-right: 2px solid #bfbfbf;
+  }
+  &__dialogs{
+    grid-area: dialogs;
+  }
 }

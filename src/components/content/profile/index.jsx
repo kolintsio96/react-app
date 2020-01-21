@@ -1,14 +1,14 @@
 import React from 'react';
 import style from './index.module.scss';
 import Banner from './banner'
-import UserInfo from "./userInfo";
+import ProfileInfo from "./profileInfo";
 import Posts from "./posts";
 
 const Profile = () => {
     return (
         <div className={style.profile}>
             <Banner />
-            <UserInfo />
+            <ProfileInfo />
             <Posts/>
         </div>
     )

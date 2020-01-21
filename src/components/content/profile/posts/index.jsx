@@ -3,6 +3,23 @@ import style from './index.module.scss'
 import PostsForm from "./form/form";
 import Post from "./post/post";
 const Posts = () => {
+    let postsArr = [
+        {
+            id: 1,
+            message: 'Post 1',
+            likes: 10
+        },
+        {
+            id: 2,
+            message: 'Post 2',
+            likes: 4
+        },
+        {
+            id: 3,
+            message: 'Post 3',
+            likes: 34
+        }
+    ];;
     return (
         <div className={style.posts}>
             <h2 className={style.posts__title}>My posts</h2>
