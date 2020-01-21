@@ -1,0 +1,9 @@
+.header{
+  grid-area: header;
+  border: 1px solid red;
+  padding: 10px 20px;
+  &__logo {
+    max-width: 100px;
+    object-fit: contain;
+  }
+}

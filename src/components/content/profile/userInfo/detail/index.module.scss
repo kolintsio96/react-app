@@ -1,0 +1,24 @@
+.user-info{
+  &__detail{
+    grid-area: detail;
+    padding-top: 20px;
+  }
+  &__name{
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  &__desc{
+    font-size: 16px;
+    &, a{
+      color: #000;
+    }
+    span{
+      &:first-child{
+        margin-right: 5px;
+      }
+    }
+    &:not(:last-child){
+      margin-bottom: 10px;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.post{
+  &-form{
+    margin-bottom: 30px;
+    &__field{
+      width: 100%;
+      background-color: #bfbfbf;
+      padding: 10px 20px;
+      min-height: 100px;
+      font-size: 16px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    &__btn{
+      width: 100px;
+      height: 30px;
+      background-color: #68ffcd;
+    }
+  }
+}
