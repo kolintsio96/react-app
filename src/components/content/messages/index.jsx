@@ -3,50 +3,18 @@ import style from './index.module.scss';
 import DialogUser from "./dialogUser";
 import Message from "./message";
 
-const Messages = () => {
-    let dialogUsers = [
-        {
-            id: 1,
-            name: 'Andrew'
-        },
-        {
-            id: 2,
-            name: 'Igor'
-        },
-        {
-            id: 3,
-            name: 'Vlad'
-        },
-    ],
-        messagesArr = [
-            {
-                id: 1,
-                message: 'Hello'
-            },
-            {
-                id: 2,
-                message: 'Hello'
-            },
-            {
-                id: 3,
-                message: 'Hello'
-            },
-        ];
+const Messages = (props) => {
+    let dialogsElements = props.state.dialogs.map(el => <DialogUser name={el.name} id={el.id} key={el.id}/>),
+        messagesElements = props.state.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>);
     return (
         <div className={style.messages}>
             <h2 className={style.messages__title}>Dialogs</h2>
             <div className={style.messages__wrap}>
                 <div className={style.messages__users}>
-                    <DialogUser name='Andrew' id='1'/>
-                    <DialogUser name='Igor' id='2'/>
-                    <DialogUser name='Vlad' id='3'/>
-                    <DialogUser name='Sergey' id='4'/>
+                    {dialogsElements}
                 </div>
                 <div className={style.messages__chat}>
-                    <Message message="Message"/>
-                    <Message message="Message"/>
-                    <Message message="Message3"/>
-                    <Message message="Message"/>
+                    {messagesElements}
                 </div>
             </div>
         </div>

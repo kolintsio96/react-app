@@ -1,10 +1,9 @@
 import React from 'react';
-import banner from './../../../../img/banner.jpg';
 import style from './index.module.scss';
-const Banner = () => {
+const Banner = (props) => {
     return (
         <div className={style.banner}>
-            <img src={banner} alt="banner" className={style.banner__img}/>
+            <img src={props.banner} alt="banner" className={style.banner__img}/>
         </div>
     )
 }

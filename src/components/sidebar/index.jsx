@@ -1,15 +1,22 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 import style from './index.module.scss'
-const Sidebar = () => {
+import NavItem from "./navItem";
+import Friend from "./friend";
+const Sidebar = (props) => {
+    let navItemsElements = props.state.links.map(el => <NavItem title={el.title} url={el.url} key={el.id}/>),
+        friendsItemsElements = props.state.friends.map(el => <Friend name={el.name} url={el.photoUrl} key={el.id}/>);
     return (
+        <div className={style.sidebar}>
             <nav className={style.nav}>
-                <div className={style.nav__item}><NavLink to="/profile" activeClassName={style.active} className={style.nav__link}>Profile</NavLink></div>
-                <div className={style.nav__item}><NavLink to="/messages" activeClassName={style.active} className={style.nav__link}>Messages</NavLink></div>
-                <div className={style.nav__item}><NavLink to="/news" activeClassName={style.active} className={style.nav__link}>News</NavLink></div>
-                <div className={style.nav__item}><NavLink to="/music" activeClassName={style.active} className={style.nav__link}>Music</NavLink></div>
-                <div className={style.nav__item}><NavLink to="/settings" activeClassName={style.active} className={style.nav__link}>Settings</NavLink></div>
+                {navItemsElements}
             </nav>
+            <div className={style.friends}>
+                <h2 className={style['friends__title']}>Friends</h2>
+                <div className={style['friends__wrap']}>
+                    {friendsItemsElements}
+                </div>
+            </div>
+        </div>
     )
 }
 export default Sidebar

@@ -1,0 +1,21 @@
+.friends{
+  &__item{
+    width: 33.3%;
+    text-align: center;
+    max-width: 60px;
+  }
+  &__icon{
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 5px;
+    padding: 0 5px;
+  }
+  &__img{
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  &__name{
+    font-size: 10px;
+  }
+}

@@ -6,11 +6,11 @@ import Messages from "./messages";
 import News from "./news";
 import Music from "./music";
 import Settings from "./settings";
-const Content = () => {
+const Content = (props) => {
     return (
             <div className={style.content}>
-                <Route path = '/profile' component = {Profile}/>
-                <Route path = '/messages' component = {Messages}/>
+                <Route path = '/profile' render={(() => <Profile state={props.state.profilePage}  />)}/>
+                <Route path = '/messages' render={() => <Messages state={props.state.messagesPage} />}/>
                 <Route path = '/news' component = {News}/>
                 <Route path = '/music' component = {Music}/>
                 <Route path = '/settings' component = {Settings}/>

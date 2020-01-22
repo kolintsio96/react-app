@@ -6,16 +6,16 @@ import Footer from "./components/footer";
 import Content from "./components/content";
 import Sidebar from "./components/sidebar";
 
-function App() {
+function App(props) {
     return (
-        <div className={style['app-wrapper']}>
-            <Header/>
-            <BrowserRouter>
-                <Sidebar/>
-                <Content/>
-            </BrowserRouter>
-            <Footer/>
-        </div>
+        <BrowserRouter>
+            <div className={style['app-wrapper']}>
+                <Header state={props.state.header}/>
+                <Sidebar state={props.state.sidebar}/>
+                <Content state={props.state.content}/>
+                <Footer/>
+            </div>
+        </BrowserRouter>
     );
 }
 
