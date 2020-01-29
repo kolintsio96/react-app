@@ -1,6 +1,12 @@
 import React from 'react';
-import style from './index.module.scss'
+import style from './index.module.scss';
+import {addLikeActionCreator} from "../../../../../redux/state";
+
 const Post = (props) => {
+    let addLike = () => {
+        let action = addLikeActionCreator(props.id)
+        props.dispatch(action);
+    }
     return (
         <div className={style['post-item']}>
             <div className={style['post-item__top']}>
@@ -10,7 +16,7 @@ const Post = (props) => {
                 <p className={style['post-item__text']}>{props.message}</p>
             </div>
             <div className={style['post-item__bottom']}>
-                <p className={style['post-item__like']}>Likes {props.likes}</p>
+                <p onClick={addLike} className={style['post-item__like']}>Likes {props.likes}</p>
             </div>
         </div>
     )

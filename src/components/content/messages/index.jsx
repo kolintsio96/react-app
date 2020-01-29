@@ -2,7 +2,7 @@ import React from 'react';
 import style from './index.module.scss';
 import DialogUser from "./dialogUser";
 import Message from "./message";
-
+import MessageForm from "./messageForm/form";
 const Messages = (props) => {
     let dialogsElements = props.state.dialogs.map(el => <DialogUser name={el.name} id={el.id} key={el.id}/>),
         messagesElements = props.state.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>);
@@ -15,6 +15,10 @@ const Messages = (props) => {
                 </div>
                 <div className={style.messages__chat}>
                     {messagesElements}
+                    <MessageForm
+                        dispatch={props.dispatch}
+                        newMessageText={props.state.newMassageText}
+                    />
                 </div>
             </div>
         </div>

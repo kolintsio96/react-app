@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import style from './index.module.scss';
 import Profile from './profile'
 import Messages from "./messages";
@@ -9,8 +9,9 @@ import Settings from "./settings";
 const Content = (props) => {
     return (
             <div className={style.content}>
-                <Route path = '/profile' render={(() => <Profile state={props.state.profilePage}  />)}/>
-                <Route path = '/messages' render={() => <Messages state={props.state.messagesPage} />}/>
+                <Redirect from='/' to='/profile' />
+                <Route path = '/profile' render={() => <Profile state={props.state.profilePage} dispatch={props.dispatch}/>}/>
+                <Route path = '/messages' render={() => <Messages state={props.state.messagesPage} dispatch={props.dispatch} />}/>
                 <Route path = '/news' component = {News}/>
                 <Route path = '/music' component = {Music}/>
                 <Route path = '/settings' component = {Settings}/>

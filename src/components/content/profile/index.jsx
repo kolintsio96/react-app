@@ -9,7 +9,7 @@ const Profile = (props) => {
         <div className={style.profile}>
             <Banner banner={props.state.bannerUrl} />
             <ProfileInfo userInfo={props.state.user} />
-            <Posts posts={props.state.posts}/>
+            <Posts state={props.state.post} dispatch={props.dispatch}/>
         </div>
     )
 }
