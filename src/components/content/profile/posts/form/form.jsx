@@ -1,22 +1,17 @@
 import React from 'react';
 import style from './index.module.scss'
-import {addPostActionCreator, updateTextPostActionCreator} from "../../../../../redux/state";
 
 const PostsForm = (props) => {
-    let newMessageElement = React.createRef();
     let addPost = () => {
-        let action = addPostActionCreator();
-        props.dispatch(action);
+        props.addPost();
     }
-    let onPostChange = () => {
-        let text = newMessageElement.current.value,
-            action = updateTextPostActionCreator(text);
-        props.dispatch(action)
+    let onPostChange = (e) => {
+        let text = e.target.value;
+        props.changeText(text)
     }
     return (
         <div className={style['message-form']}>
             <textarea
-                ref={newMessageElement}
                 name="message"
                 className={style['message-form__field']}
                 placeholder='your news'

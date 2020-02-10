@@ -7,9 +7,15 @@ import Posts from "./posts";
 const Profile = (props) => {
     return (
         <div className={style.profile}>
-            <Banner banner={props.state.bannerUrl} />
-            <ProfileInfo userInfo={props.state.user} />
-            <Posts state={props.state.post} dispatch={props.dispatch}/>
+            <Banner banner={props.bannerUrl} />
+            <ProfileInfo userInfo={props.userInfo} />
+            <Posts
+                posts={props.posts}
+                addLike={props.addLike}
+                addPost={props.addPost}
+                changeText={props.changeText}
+                newPostText={props.newPostText}
+            />
         </div>
     )
 }

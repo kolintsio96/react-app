@@ -1,20 +1,16 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom'
 import style from './index.module.scss';
-import Profile from './profile'
-import Messages from "./messages";
-import News from "./news";
-import Music from "./music";
-import Settings from "./settings";
-const Content = (props) => {
+import MessagesContainer from "./messages/messagesContainer";
+import ProfileContainer from "./profile/profileContainer";
+import UsersContainer from "./users/usersContainer";
+const Content = () => {
     return (
             <div className={style.content}>
                 <Redirect from='/' to='/profile' />
-                <Route path = '/profile' render={() => <Profile state={props.state.profilePage} dispatch={props.dispatch}/>}/>
-                <Route path = '/messages' render={() => <Messages state={props.state.messagesPage} dispatch={props.dispatch} />}/>
-                <Route path = '/news' component = {News}/>
-                <Route path = '/music' component = {Music}/>
-                <Route path = '/settings' component = {Settings}/>
+                <Route path = '/profile' render={() => <ProfileContainer/>}/>
+                <Route path = '/messages' render={() => <MessagesContainer/>}/>
+                <Route path = '/users' render={() => <UsersContainer/>}/>
             </div>
     )
 }

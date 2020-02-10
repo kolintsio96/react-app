@@ -1,19 +1,16 @@
 import React from 'react';
 import style from './index.module.scss'
-import Header from "./components/header";
 import Footer from "./components/footer";
 import Content from "./components/content";
-import Sidebar from "./components/sidebar";
+import HeaderContainer from "./components/header/headerContainer";
+import SidebarContainer from "./components/sidebar/sidebarContainer";
 
-function App(props) {
+function App() {
     return (
         <div className={style['app-wrapper']}>
-            <Header state={props.state.header}/>
-            <Sidebar state={props.state.sidebar}/>
-            <Content
-                state={props.state.content}
-                dispatch={props.dispatch}
-            />
+            <HeaderContainer/>
+            <SidebarContainer/>
+            <Content/>
             <Footer/>
         </div>
     );

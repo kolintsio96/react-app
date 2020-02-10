@@ -4,8 +4,8 @@ import DialogUser from "./dialogUser";
 import Message from "./message";
 import MessageForm from "./messageForm/form";
 const Messages = (props) => {
-    let dialogsElements = props.state.dialogs.map(el => <DialogUser name={el.name} id={el.id} key={el.id}/>),
-        messagesElements = props.state.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>);
+    let dialogsElements = props.dialogs.map(el => <DialogUser name={el.name} id={el.id} key={el.id}/>),
+        messagesElements = props.messages.map(el => <Message message={el.message} id={el.id} key={el.id}/>);
     return (
         <div className={style.messages}>
             <h2 className={style.messages__title}>Dialogs</h2>
@@ -16,8 +16,9 @@ const Messages = (props) => {
                 <div className={style.messages__chat}>
                     {messagesElements}
                     <MessageForm
-                        dispatch={props.dispatch}
-                        newMessageText={props.state.newMassageText}
+                        addMessage={props.addMessage}
+                        changeText={props.changeText}
+                        newMessageText={props.newMessageText}
                     />
                 </div>
             </div>

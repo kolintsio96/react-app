@@ -3,8 +3,8 @@ import style from './index.module.scss'
 import NavItem from "./navItem";
 import Friend from "./friend";
 const Sidebar = (props) => {
-    let navItemsElements = props.state.links.map(el => <NavItem title={el.title} url={el.url} key={el.id}/>),
-        friendsItemsElements = props.state.friends.map(el => <Friend name={el.name} url={el.photoUrl} key={el.id}/>);
+    let navItemsElements = props.sidebar.links.map(el => <NavItem title={el.title} url={el.url} key={el.id}/>),
+        friendsItemsElements = props.sidebar.friends.map(el => <Friend name={el.name} url={el.photoUrl} key={el.id}/>);
     return (
         <div className={style.sidebar}>
             <nav className={style.nav}>
