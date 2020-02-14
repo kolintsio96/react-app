@@ -1,16 +1,18 @@
 import React from 'react';
 import style from './index.module.scss'
 const ProfileDetail = (props) => {
-    let validPhone = props.propsUser.phone.trim().replace(/[\s,(,)]+/g, '');
     return (
         <div className={style['user-info__detail']}>
-            <h2 className={style['user-info__name']}>{`${props.propsUser.name} ${props.propsUser.surname}`}</h2>
-            <p className={style['user-info__desc']}>Phone: <a href={`tel:${validPhone}`}>{props.propsUser.phone}</a></p>
-            <p className={style['user-info__desc']}>Email: <a href={`mailto:${props.propsUser.email}`}>{props.propsUser.email}</a></p>
-            <p className={style['user-info__desc']}>Date of Birth: {props.propsUser.birthday}</p>
-            <p className={style['user-info__desc']}>City: {props.propsUser.city}</p>
-            <p className={style['user-info__desc']}>Education: {props.propsUser.education}</p>
-            <p className={style['user-info__desc']}>Web Site: <a target='_blank' rel='noopener noreferrer' href={props.propsUser.website} className={style['user-info__site']}>{props.propsUser.website}</a></p>
+            <h2 className={style['user-info__name']}>{props.fullName}</h2>
+            <p className={style['user-info__desc']}>About me: {props.aboutMe}</p>
+            {props.lookingForAJob && <p className={style['user-info__desc']}>Job status: {props.lookingForAJobDescription}</p>}
+            <p className={style['user-info__desc']}>Web Site:
+            {
+                Object.keys(props.contacts).map((key, i) => {
+                    return props.contacts[key] != null ? <a key={i} target='_blank' rel='noopener noreferrer' href={props.contacts[key]} className={style['user-info__site']}>{key}</a> : '';
+                })
+            }
+            </p>
         </div>
     )
 }

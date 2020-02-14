@@ -5,8 +5,8 @@ import ProfileDetail from './profileDetail'
 const ProfileInfo = (props) => {
     return (
         <div className={style['user-info']}>
-            <ProfilePhoto url={props.userInfo.photoUrl} />
-            <ProfileDetail propsUser={props.userInfo}/>
+            <ProfilePhoto url={props.userInfo.photos.large} />
+            <ProfileDetail {...props.userInfo}/>
         </div>
     )
 }

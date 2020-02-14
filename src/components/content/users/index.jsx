@@ -9,7 +9,7 @@ let Users = (props) => {
         pages.push(i);
     }
     let mapUsers = props.users.map(user => {
-        return <User key={user.id} user={user} follow={props.follow} unfollow={props.unfollow}/>
+        return <User key={user.id} id={user.id} user={user} follow={props.follow} unfollow={props.unfollow}/>
     });
     let mapPagination = pages.map(p => {
         return <span key={p}

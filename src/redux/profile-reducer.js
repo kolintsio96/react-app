@@ -1,15 +1,15 @@
 import postsAvatar from "../img/post--avatar.png";
-import userPhoto from "../img/avatar.png";
 import banner from "../img/banner.jpg";
 
 const ADD_POST = 'ADD-POST',
     ADD_LIKE = 'ADD-LIKE',
+    SET_PROFILE = 'SET_PROFILE',
     UPDATE_TEXT_POST = 'UPDATE-TEXT-POST';
 
-
-export let addPostActionCreator = () => ({type: ADD_POST});
-export let addLikeActionCreator = (id) => ({type: ADD_LIKE, id: id});
-export let updateTextPostActionCreator = (message) => ({type: UPDATE_TEXT_POST, newText: message});
+export let addPost = () => ({type: ADD_POST});
+export let setProfile = (profile) => ({type: SET_PROFILE, profile});
+export let addLike = (id) => ({type: ADD_LIKE, id: id});
+export let changeText = (message) => ({type: UPDATE_TEXT_POST, newText: message});
 
 let postsArr = [
         {
@@ -37,16 +37,26 @@ let initialState = {
             posts: postsArr,
             newTextPost: '',
         },
-        user: {
-            photoUrl: userPhoto,
-            name: 'Volodymyr',
-            surname: 'Kolintso',
-            website: 'https://github.com/kolintsio96',
-            education: 'National Aviation University',
-            email: 'kolintsiovolodymyr@gmail.com',
-            city: 'Kyiv',
-            birthday: '10 Jul 1996',
-            phone: '+380 (93) 47 35 200',
+        profile: {
+            "aboutMe": null,
+            "contacts": {
+                "facebook": null,
+                "website": null,
+                "vk": null,
+                "twitter": null,
+                "instagram": null,
+                "youtube": null,
+                "github": null,
+                "mainLink": null
+            },
+            "lookingForAJob": false,
+            "lookingForAJobDescription": null,
+            "fullName": null,
+            "userId": 2,
+            "photos": {
+                "small": null,
+                "large": null
+            }
         },
         bannerUrl: banner
     };
@@ -94,6 +104,12 @@ let profileReducer = (state = initialState, action) => {
                     ...state.post,
                     newTextPost: action.newText
                 }
+            };
+        }
+        case SET_PROFILE: {
+            return {
+                ...state,
+                profile:{...action.profile}
             };
         }
         default: {

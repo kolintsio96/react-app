@@ -7,8 +7,8 @@ import Posts from "./posts";
 const Profile = (props) => {
     return (
         <div className={style.profile}>
-            <Banner banner={props.bannerUrl} />
-            <ProfileInfo userInfo={props.userInfo} />
+            <Banner banner={props.bannerUrl ? props.bannerUrl : null} />
+            <ProfileInfo userInfo={props.profile ? props.profile : {}} />
             <Posts
                 posts={props.posts}
                 addLike={props.addLike}
