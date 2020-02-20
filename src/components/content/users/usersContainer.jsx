@@ -8,26 +8,24 @@ import {
     unfollow
 } from "../../../redux/users-reducer";
 import React from "react";
-import * as axios from "axios";
 import Preloader from "../../common/preloader";
+import {usersAPI} from "../../../api";
 
 class UserContainer extends React.Component {
     getUsers = (page = 1) => {
+
         this.props.toggleIsFetching(true);
-        let baseUrl = `https://social-network.samuraijs.com/api/1.0`;
-        axios.get(`${baseUrl}/users?page=${page}&count=${this.props.pagination.limit}`)
-            .then(response => {
-                let data = response.data;
+        usersAPI.getUsersData(page, this.props.pagination.limit)
+            .then(data => {
                 this.props.setUsers(data.items);
                 this.props.setTotalPagination(data.totalCount);
                 this.props.toggleIsFetching(false)
             })
-    }
+    };
     changePage = (page) => {
         this.props.setActivePagination(page);
         this.getUsers(page);
-    }
-
+    };
     componentDidMount() {
         this.props.setActivePagination(1);
         this.getUsers();
@@ -35,7 +33,7 @@ class UserContainer extends React.Component {
 
     render() {
         return <>
-            {this.props.isFetching?<Preloader/>:null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users
                 changePage={this.changePage}
                 follow={this.props.follow}

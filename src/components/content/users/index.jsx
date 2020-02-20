@@ -15,7 +15,8 @@ let Users = (props) => {
         return <span key={p}
                      className={props.pagination.current === p ? `${style['pagination__item']} ${style['pagination__item_active']}` : style['pagination__item']}
                      onClick={() => {props.changePage(p)}}>{p}</span>
-    })
+    });
+
     return (
         <div className={style.users}>
             <h2 className={style['users__title']}>Users</h2>

@@ -10,7 +10,6 @@ export let setAuthInfo = (authData) => ({type: SET_AUTH_INFO, data: authData});
 let authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH_INFO: {
-            console.log(action.data)
             return {
                 ...state,
                 ...action.data,
