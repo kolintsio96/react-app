@@ -3,6 +3,7 @@ import {addPost, changeText, addLike, setProfile} from "../../../redux/profile-r
 import {connect} from "react-redux";
 import React from "react";
 import * as axios from "axios";
+import {withRouter} from "react-router-dom";
 
 class ProfileClassContainer extends React.Component {
     getData = (userId) => {
@@ -13,7 +14,8 @@ class ProfileClassContainer extends React.Component {
             })
     };
     componentDidMount() {
-        this.getData(9);
+        let userId = this.props.match.params.userId ? this.props.match.params.userId : 2;
+        this.getData(userId);
     }
 
     render() {
@@ -29,5 +31,6 @@ let mapStateToProps = (state) => {
         newPostText: state.profilePage.post.newTextPost
     }
 }
-const ProfileContainer = connect(mapStateToProps, {addPost, changeText, addLike, setProfile})(ProfileClassContainer)
+let WirhUrlProfileClassContainer = withRouter(ProfileClassContainer)
+const ProfileContainer = connect(mapStateToProps, {addPost, changeText, addLike, setProfile})(WirhUrlProfileClassContainer)
 export default ProfileContainer

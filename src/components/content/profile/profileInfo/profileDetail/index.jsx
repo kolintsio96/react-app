@@ -3,16 +3,16 @@ import style from './index.module.scss'
 const ProfileDetail = (props) => {
     return (
         <div className={style['user-info__detail']}>
-            <h2 className={style['user-info__name']}>{props.fullName}</h2>
-            <p className={style['user-info__desc']}>About me: {props.aboutMe}</p>
+            {props.fullName && <h2 className={style['user-info__name']}>{props.fullName}</h2>}
+            {props.aboutMe && <p className={style['user-info__desc']}>About me: {props.aboutMe}</p>}
             {props.lookingForAJob && <p className={style['user-info__desc']}>Job status: {props.lookingForAJobDescription}</p>}
-            <p className={style['user-info__desc']}>Web Site:
+            {props.contacts.length > 0 && <p className={style['user-info__desc']}>Web Site:
             {
                 Object.keys(props.contacts).map((key, i) => {
                     return props.contacts[key] != null ? <a key={i} target='_blank' rel='noopener noreferrer' href={props.contacts[key]} className={style['user-info__site']}>{key}</a> : '';
                 })
             }
-            </p>
+            </p>}
         </div>
     )
 }

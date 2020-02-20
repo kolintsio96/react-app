@@ -29,6 +29,7 @@ class UserContainer extends React.Component {
     }
 
     componentDidMount() {
+        this.props.setActivePagination(1);
         this.getUsers();
     }
 
