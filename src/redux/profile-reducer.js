@@ -1,5 +1,6 @@
 import postsAvatar from "../img/post--avatar.png";
 import banner from "../img/banner.jpg";
+import {profileAPI} from "../api";
 
 const ADD_POST = 'ADD-POST',
     ADD_LIKE = 'ADD-LIKE',
@@ -10,6 +11,15 @@ export let addPost = () => ({type: ADD_POST});
 export let setProfile = (profile) => ({type: SET_PROFILE, profile});
 export let addLike = (id) => ({type: ADD_LIKE, id: id});
 export let changeText = (message) => ({type: UPDATE_TEXT_POST, newText: message});
+
+export let getProfileData = (userId) => {
+    return (dispatch) => {
+        profileAPI.getProfileData(userId)
+            .then(response => {
+                dispatch(setProfile(response));
+            })
+    }
+}
 
 let postsArr = [
         {

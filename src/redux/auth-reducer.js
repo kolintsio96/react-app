@@ -1,3 +1,5 @@
+import {authAPI} from "../api";
+
 const SET_AUTH_INFO = 'SET_AUTH_INFO';
 let initialState = {
   login: null,
@@ -7,6 +9,14 @@ let initialState = {
 };
 
 export let setAuthInfo = (authData) => ({type: SET_AUTH_INFO, data: authData});
+export let getAuthInfo = () => {
+    return (dispatch) => {
+        authAPI.getAuthData()
+            .then(response => {
+                dispatch(setAuthInfo(response.data));
+            })
+    }
+}
 let authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH_INFO: {

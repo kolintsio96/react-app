@@ -1,9 +1,12 @@
+import {usersAPI} from "../api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USER = 'SET_USER';
 const SET_ACTIVE_PAGINATION = 'SET_ACTIVE_PAGINATION';
 const SET_TOTAL_PAGINATION = 'SET_TOTAL_PAGINATION';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_FOLLOWING = 'TOGGLE_FOLLOWING';
 
 
 export let follow = (userId) => ({type: FOLLOW, id:userId});
@@ -12,6 +15,31 @@ export let setUsers = (users) => ({type: SET_USER, users: users});
 export let setActivePagination = (page) => ({type: SET_ACTIVE_PAGINATION, page: page});
 export let setTotalPagination = (total) => ({type: SET_TOTAL_PAGINATION, total: total});
 export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export let toggleFollowing = (isFetching, id) => ({type: TOGGLE_FOLLOWING, isFetching, id});
+
+export let getUsers = (page, limit) => {
+    return (dispatch) => {
+        dispatch(setActivePagination(page));
+        dispatch(toggleIsFetching(true));
+        usersAPI.getUsersData(page, limit)
+            .then(data => {
+                dispatch(setUsers(data.items));
+                dispatch(setTotalPagination(data.totalCount));
+                dispatch(toggleIsFetching(false));
+            })
+    }
+};
+export let followingUser = (userId, followed) => {
+    return (dispatch) => {
+        dispatch(toggleFollowing(true, userId));
+        let promise = !followed ? usersAPI.followUser(userId) : usersAPI.unfollowUser(userId)
+        promise
+            .then(response => {
+                dispatch(toggleFollowing(false, userId));
+                response.resultCode === 0 && !followed ? dispatch(follow(userId)) : dispatch(unfollow(userId));
+            })
+    }
+};
 
 let initialState = {
     users: [],
@@ -20,7 +48,8 @@ let initialState = {
         current:1,
         limit: 100
     },
-    isFetching: false
+    isFetching: false,
+    inProgressFollowing: [],
 };
 
 let usersReducer = (state = initialState, action) => {
@@ -83,7 +112,14 @@ let usersReducer = (state = initialState, action) => {
                 isFetching: action.isFetching
             }
         }
-
+        case TOGGLE_FOLLOWING:{
+            return {
+                ...state,
+                inProgressFollowing: action.isFetching
+                    ? [...state.inProgressFollowing, action.id]
+                    : [state.inProgressFollowing.filter(id => {return id !== action.id})]
+            }
+        }
         default: {
             return {...state}
         }

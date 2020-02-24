@@ -10,5 +10,27 @@ export const usersAPI = {
     getUsersData(page, count){
         return instanse.get(`/users?page=${page}&count=${count}`)
             .then(response => response.data);
+    },
+    followUser(userId){
+        return instanse.post(`/follow/${userId}`)
+            .then(response => response.data)
+    },
+    unfollowUser(userId){
+        return instanse.delete(`/follow/${userId}`)
+            .then(response => response.data)
+    },
+};
+export const profileAPI = {
+    getProfileData(userId){
+        return instanse.get(`/profile/${userId}`)
+            .then(response => response.data)
     }
-}
+
+};
+export const authAPI = {
+    getAuthData(){
+        return instanse.get(`/auth/me`)
+            .then(response => response.data)
+    }
+
+};
