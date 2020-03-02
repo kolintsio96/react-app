@@ -13,7 +13,7 @@ export let getAuthInfo = () => {
     return (dispatch) => {
         authAPI.getAuthData()
             .then(response => {
-                dispatch(setAuthInfo(response.data));
+                dispatch(setAuthInfo(response));
             })
     }
 }
@@ -22,8 +22,8 @@ let authReducer = (state = initialState, action) => {
         case SET_AUTH_INFO: {
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data.data,
+                isAuth: action.data.resultCode === 0
             }
         }
         default: {

@@ -3,6 +3,8 @@ import {addPost, changeText, addLike, getProfileData} from "../../../redux/profi
 import {connect} from "react-redux";
 import React from "react";
 import {withRouter} from "react-router-dom";
+import withAuthRedirect from "../../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class ProfileClassContainer extends React.Component {
     componentDidMount() {
@@ -20,9 +22,8 @@ let mapStateToProps = (state) => {
         bannerUrl: state.profilePage.bannerUrl,
         profile: state.profilePage.profile,
         posts: state.profilePage.post.posts,
-        newPostText: state.profilePage.post.newTextPost
+        newPostText: state.profilePage.post.newTextPost,
+        isAuth: state.auth.isAuth
     }
-}
-let WirhUrlProfileClassContainer = withRouter(ProfileClassContainer)
-const ProfileContainer = connect(mapStateToProps, {addPost, changeText, addLike, getProfileData})(WirhUrlProfileClassContainer)
-export default ProfileContainer
+};
+export default compose(withAuthRedirect, withRouter, connect(mapStateToProps, {addPost, changeText, addLike, getProfileData}))(ProfileClassContainer)
