@@ -6,7 +6,7 @@ const ProfileDetail = (props) => {
         <div className={style['user-info__detail']}>
             <div className={style['user-info__header']}>
                 {props.fullName && <h2 className={style['user-info__name']}>{props.fullName}</h2>}
-                <ProfileStatus status={'My status'}/>
+                <ProfileStatus setUserStatus={props.setUserStatus} status={props.status}/>
             </div>
             {props.aboutMe && <p className={style['user-info__desc']}>About me: {props.aboutMe}</p>}
             {props.lookingForAJob && <p className={style['user-info__desc']}>Job status: {props.lookingForAJobDescription}</p>}

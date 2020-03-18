@@ -6,11 +6,11 @@ import Posts from "./posts";
 import Preloader from "../../common/preloader";
 
 const Profile = (props) => {
-    if (!props.profile) return <Preloader/>
+    if (!props.profile) return <Preloader/>;
     return (
         <div className={style.profile}>
             <Banner banner={props.bannerUrl} />
-            <ProfileInfo userInfo={props.profile} />
+            <ProfileInfo userInfo={props.profile} setUserStatus={props.setStatus} />
             <Posts
                 posts={props.posts}
                 postPhoto={props.profile.photos.large}

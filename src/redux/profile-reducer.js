@@ -5,10 +5,12 @@ import {profileAPI} from "../api";
 const ADD_POST = 'ADD-POST',
     ADD_LIKE = 'ADD-LIKE',
     SET_PROFILE = 'SET_PROFILE',
+    SET_USER_STATUS = 'SET_USER_STATUS',
     UPDATE_TEXT_POST = 'UPDATE-TEXT-POST';
 
 export let addPost = () => ({type: ADD_POST});
 export let setProfile = (profile) => ({type: SET_PROFILE, profile});
+export let setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 export let addLike = (id) => ({type: ADD_LIKE, id: id});
 export let changeText = (message) => ({type: UPDATE_TEXT_POST, newText: message});
 
@@ -19,7 +21,24 @@ export let getProfileData = (userId) => {
                 dispatch(setProfile(response));
             })
     }
-}
+};
+export let getUserStatus = (userId) => {
+    return (dispatch) => {
+        profileAPI.getUserStatus(userId)
+            .then(response => {
+                let status = response ? response : '';
+                dispatch(setUserStatus(status));
+            })
+    }
+};
+export let setStatus = (userId) => {
+    return (dispatch) => {
+        profileAPI.setUserStatus(userId)
+            .then(response => {
+                dispatch(setUserStatus(response.message));
+            })
+    }
+};
 
 let postsArr = [
         {
@@ -62,7 +81,8 @@ let initialState = {
             "lookingForAJob": false,
             "lookingForAJobDescription": null,
             "fullName": null,
-            "userId": 2,
+            "userId": 6039,
+            'status': '',
             "photos": {
                 "small": null,
                 "large": null
@@ -120,6 +140,16 @@ let profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 profile:{...action.profile}
+            };
+        }
+        case SET_USER_STATUS: {
+            console.log(action)
+            return {
+                ...state,
+                profile:{
+                    ...state.profile,
+                    status: action.status
+                }
             };
         }
         default: {

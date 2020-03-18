@@ -5,14 +5,20 @@ class ProfileStatus extends React.Component{
         editMode: false,
         status: this.props.status
     };
-    toggleEditMode(){
+    activeEditMode = () => {
         this.setState({
-            editMode: !this.state.editMode
+            editMode: true
         })
-    }
-    changeStatus(value){
+    };
+    disableEditMode = () => {
         this.setState({
-            status: value
+            editMode: false
+        });
+        this.props.setUserStatus(this.state.status);
+    };
+    changeStatus = (e) => {
+        this.setState({
+            status: e.currentTarget.value
         })
     }
     render() {
@@ -20,11 +26,11 @@ class ProfileStatus extends React.Component{
             <div className={style['user-info__status']}>
                 {
                     !this.state.editMode &&
-                    <span onDoubleClick={this.toggleEditMode.bind(this)}>{this.state.status}</span>
+                    <span onDoubleClick={this.activeEditMode.bind(this)}>{this.state.status ? this.state.status : '----------'}</span>
                 }
                 {
                     this.state.editMode &&
-                    <input onChange={(e) => {this.changeStatus(e.target.value)}} autoFocus={true} onBlur={this.toggleEditMode.bind(this)} value={this.state.status} type="text"/>
+                    <input onChange={this.changeStatus} autoFocus={true} onBlur={this.disableEditMode.bind(this)} value={this.state.status ? this.state.status : '----------'} type="text"/>
                 }
             </div>
         )

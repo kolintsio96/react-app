@@ -24,6 +24,14 @@ export const profileAPI = {
     getProfileData(userId){
         return instanse.get(`/profile/${userId}`)
             .then(response => response.data)
+    },
+    setUserStatus(status){
+        return instanse.put(`/profile/status`, {status})
+            .then(response => response.data)
+    },
+    getUserStatus(userId){
+        return instanse.get(`/profile/status/${userId}`)
+            .then(response => response.data)
     }
 
 };
