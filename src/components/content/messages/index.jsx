@@ -17,11 +17,7 @@ const Messages = (props) => {
                 </div>
                 <div className={style.messages__chat}>
                     {messagesElements}
-                    <MessageForm
-                        addMessage={props.addMessage}
-                        changeText={props.changeText}
-                        newMessageText={props.newMessageText}
-                    />
+                    <MessageForm onSubmit={props.addMessage}/>
                 </div>
             </div>
         </div>

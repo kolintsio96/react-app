@@ -1,6 +1,7 @@
 import {authAPI} from "../api";
 
 const SET_AUTH_INFO = 'SET_AUTH_INFO';
+const POST_LOGIN = 'POST_LOGIN';
 let initialState = {
   login: null,
   email: null,
@@ -16,7 +17,15 @@ export let getAuthInfo = () => {
                 dispatch(setAuthInfo(response));
             })
     }
-}
+};
+export let postLogin = (data) => {
+    return (dispatch) => {
+        authAPI.postLogin(data)
+            .then(response => {
+                dispatch(setAuthInfo(response));
+            })
+    }
+};
 let authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH_INFO: {
@@ -24,6 +33,12 @@ let authReducer = (state = initialState, action) => {
                 ...state,
                 ...action.data.data,
                 isAuth: action.data.resultCode === 0
+            }
+        }
+        case POST_LOGIN: {
+            return {
+                ...state,
+                isAuth: true
             }
         }
         default: {

@@ -7,7 +7,7 @@ const Posts = (props) => {
     return (
         <div className={style.posts}>
             <h2 className={style.posts__title}>My posts</h2>
-            <PostsForm addPost={props.addPost} changeText={props.changeText} postText={props.newPostText}/>
+            <PostsForm onSubmit={props.addPost}/>
             <div className={style['post-list']}>
                 {postsElements}
             </div>

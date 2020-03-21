@@ -8,7 +8,7 @@ const ADD_POST = 'ADD-POST',
     SET_USER_STATUS = 'SET_USER_STATUS',
     UPDATE_TEXT_POST = 'UPDATE-TEXT-POST';
 
-export let addPost = () => ({type: ADD_POST});
+export let addPost = (data) => ({type: ADD_POST, data});
 export let setProfile = (profile) => ({type: SET_PROFILE, profile});
 export let setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 export let addLike = (id) => ({type: ADD_LIKE, id: id});
@@ -31,11 +31,11 @@ export let getUserStatus = (userId) => {
             })
     }
 };
-export let setStatus = (userId) => {
+export let setStatus = (status) => {
     return (dispatch) => {
-        profileAPI.setUserStatus(userId)
-            .then(response => {
-                dispatch(setUserStatus(response.message));
+        profileAPI.setUserStatus(status)
+            .then(() => {
+                dispatch(setUserStatus(status));
             })
     }
 };
@@ -82,7 +82,7 @@ let initialState = {
             "lookingForAJobDescription": null,
             "fullName": null,
             "userId": 6039,
-            'status': '',
+            'status': null,
             "photos": {
                 "small": null,
                 "large": null
@@ -94,10 +94,9 @@ let initialState = {
 let profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
-            if (!state.post.newTextPost) return {...state};
             let newPost = {
                 id: state.post.posts.length + 1,
-                message: state.post.newTextPost,
+                message: action.data.newPostText,
                 likes: 0,
                 photo: postsAvatar
             };
@@ -143,7 +142,6 @@ let profileReducer = (state = initialState, action) => {
             };
         }
         case SET_USER_STATUS: {
-            console.log(action)
             return {
                 ...state,
                 profile:{

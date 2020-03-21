@@ -39,6 +39,10 @@ export const authAPI = {
     getAuthData(){
         return instanse.get(`/auth/me`)
             .then(response => response.data)
+    },
+    postLogin(data){
+        return instanse.post(`/auth/login`, data)
+            .then(response => response.data)
     }
 
 };

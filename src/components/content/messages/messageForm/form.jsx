@@ -1,24 +1,16 @@
 import React from 'react';
 import style from './index.module.scss';
+import {Field, reduxForm} from "redux-form";
 
 const MessageForm = (props) => {
-    let addMessage = () => {
-        props.addMessage();
-    };
-    let onChangeText = (e) => {
-        let textValue = e.target.value;
-        props.changeText(textValue);
-    }
     return (
-        <div className={style['post-form']}>
-            <textarea
-                name="post" className={style['post-form__field']}
-                placeholder='your message'
-                value={props.newMessageText}
-                onChange={onChangeText}
-            />
-            <button onClick={addMessage} className={style['post-form__btn']}>Send</button>
-        </div>
+        <form onSubmit={props.handleSubmit} className={style['post-form']}>
+            <Field className={style['post-form__field']} component={'textarea'} name={'newMessageText'} placeholder={'your message'}/>
+            <button className={style['post-form__btn']}>Send</button>
+        </form>
     )
-}
-export default MessageForm
+};
+const MessageFormRedux = reduxForm({
+    form: 'messageForm'
+})(MessageForm);
+export default MessageFormRedux
