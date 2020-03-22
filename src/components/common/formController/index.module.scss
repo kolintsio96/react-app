@@ -1,0 +1,15 @@
+.form-controller{
+  &.has-error{
+    margin-bottom: 10px;
+    textarea{
+      border: 1px solid red;
+      margin-bottom: 5px;
+    }
+    input{
+      border-bottom: 1px solid red;
+    }
+  }
+  &__error{
+    color: red;
+  }
+}

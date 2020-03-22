@@ -40,9 +40,13 @@ export const authAPI = {
         return instanse.get(`/auth/me`)
             .then(response => response.data)
     },
-    postLogin(data){
+    login(data){
         return instanse.post(`/auth/login`, data)
             .then(response => response.data)
-    }
+    },
+    logout(data){
+        return instanse.delete(`/auth/login`)
+            .then(response => response.data)
+    },
 
 };

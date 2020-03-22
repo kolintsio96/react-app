@@ -1,28 +1,42 @@
 import {authAPI} from "../api";
 
 const SET_AUTH_INFO = 'SET_AUTH_INFO';
-const POST_LOGIN = 'POST_LOGIN';
 let initialState = {
   login: null,
   email: null,
-  id: null,
+  userId: null,
   isAuth: false
 };
 
-export let setAuthInfo = (authData) => ({type: SET_AUTH_INFO, data: authData});
+export let setAuthInfo = (userId, login, email, isAuth) => ({type: SET_AUTH_INFO, payload: {userId, login, email, isAuth}});
 export let getAuthInfo = () => {
     return (dispatch) => {
         authAPI.getAuthData()
             .then(response => {
-                dispatch(setAuthInfo(response));
+                if(response.resultCode === 0){
+                    let {id, login, email} = response.data;
+                    dispatch(setAuthInfo(id, login, email, true));
+                }
             })
     }
 };
-export let postLogin = (data) => {
+export let login = (data) => {
     return (dispatch) => {
-        authAPI.postLogin(data)
+        authAPI.login(data)
             .then(response => {
-                dispatch(setAuthInfo(response));
+                if (response.resultCode === 0){
+                  dispatch(getAuthInfo());
+                }
+            })
+    }
+};
+export let logout = () => {
+    return (dispatch) => {
+        authAPI.logout()
+            .then(response => {
+                if (response.resultCode === 0){
+                    dispatch(setAuthInfo(null, null, null, false));
+                }
             })
     }
 };
@@ -31,14 +45,7 @@ let authReducer = (state = initialState, action) => {
         case SET_AUTH_INFO: {
             return {
                 ...state,
-                ...action.data.data,
-                isAuth: action.data.resultCode === 0
-            }
-        }
-        case POST_LOGIN: {
-            return {
-                ...state,
-                isAuth: true
+                ...action.payload
             }
         }
         default: {

@@ -52,9 +52,14 @@
     }
   }
   &__label{
-    display: flex;
-    align-items: center;
+    &.checkbox{
+      display: flex;
+      align-items: center;
+    }
     cursor: pointer;
+    .form-controller{
+      width: 100%;
+    }
     &:not(:last-child){
       margin-bottom: 20px;
     }
