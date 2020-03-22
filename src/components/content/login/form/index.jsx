@@ -1,5 +1,6 @@
 import React from "react";
 import style from './../index.module.scss';
+import styleForm from './../../../common/formController/index.module.scss';
 import {Field, reduxForm} from "redux-form";
 import {Checkbox, Input} from "../../../common/formController/formController";
 import {required} from "../../../../utils/validation";
@@ -16,6 +17,10 @@ const LoginForm = (props) => {
             <Field className={style['login__checkbox']} name={'rememberMe'} component={Checkbox}  type={'checkbox'}/>
             <span>remember me</span>
         </label>
+        {
+            props.error &&
+                <div className={styleForm['form-summary-error']}>{props.error}</div>
+        }
         <div className={style['login__label']}>
             <button className={style['login__button']}>Submit</button>
         </div>
