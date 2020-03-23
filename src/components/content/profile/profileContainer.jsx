@@ -11,6 +11,8 @@ import {connect} from "react-redux";
 import React from "react";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
+import {getUserId, isAuth} from "../../../redux/selectors/auth-selectors";
+import {getBanner, getPosts, getProfile} from "../../../redux/selectors/profile-selectors";
 
 class ProfileClassContainer extends React.Component {
     componentDidMount() {
@@ -33,12 +35,11 @@ class ProfileClassContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        bannerUrl: state.profilePage.bannerUrl,
-        profile: state.profilePage.profile,
-        posts: state.profilePage.post.posts,
-        newPostText: state.profilePage.post.newTextPost,
-        isAuth: state.auth.isAuth,
-        authorizedUserId: state.auth.userId
+        bannerUrl: getBanner(state),
+        profile: getProfile(state),
+        posts: getPosts(state),
+        isAuth: isAuth(state),
+        authorizedUserId: getUserId(state)
     }
 };
 export default compose(withRouter, connect(mapStateToProps, {addPost, changeText, addLike, getProfileData, getUserStatus, setStatus}))(ProfileClassContainer)

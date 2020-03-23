@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import ReduxLoginForm from './form/index';
 import style from './index.module.scss';
 import {Redirect} from "react-router-dom";
+import {isAuth} from "../../../redux/selectors/auth-selectors";
 
 class Login extends React.Component {
     onSubmit = (data) => {
@@ -21,7 +22,7 @@ class Login extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: isAuth(state)
     }
 }
 export default connect(mapStateToProps,{login})(Login)

@@ -8,6 +8,12 @@ import {
 import React from "react";
 import Preloader from "../../common/preloader";
 import {compose} from "redux";
+import {
+    getUsersData, inProgressFollowing, isFetching,
+    paginationCurrent,
+    paginationLimit,
+    paginationTotal
+} from "../../../redux/selectors/users-selectors";
 
 class UserContainer extends React.Component {
     changePage = (page) => {
@@ -35,14 +41,14 @@ class UserContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
+        users: getUsersData(state),
         pagination: {
-            total: state.usersPage.pagination.total,
-            current: state.usersPage.pagination.current,
-            limit: state.usersPage.pagination.limit,
+            total: paginationTotal(state),
+            current: paginationCurrent(state),
+            limit: paginationLimit(state),
         },
-        isFetching: state.usersPage.isFetching,
-        inProgressFollowing: state.usersPage.inProgressFollowing
+        isFetching: isFetching(state),
+        inProgressFollowing: inProgressFollowing(state)
     }
 }
 let mapDispatchToProps = {follow, unfollow, toggleFollowing, getUsers, followingUser}

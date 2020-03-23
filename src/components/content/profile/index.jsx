@@ -17,7 +17,6 @@ const Profile = (props) => {
                 addLike={props.addLike}
                 addPost={props.addPost}
                 changeText={props.changeText}
-                newPostText={props.newPostText}
             />
         </div>
     )
