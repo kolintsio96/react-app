@@ -1,6 +1,14 @@
-export const getUsersData = state => {
+import {createSelector} from "reselect";
+
+const getUsersSelector = state => {
     return state.usersPage.users;
 };
+export const getUsersData = createSelector(getUsersSelector, (users) => {
+    // https://www.npmjs.com/package/reselect
+    // https://github.com/devSchacht/translations/blob/master/articles/reselect-selector-library-for-redux/readme.md
+    // Library for difficult selectors
+    return users;
+});
 export const paginationTotal = state => {
     return state.usersPage.pagination.total;
 };
