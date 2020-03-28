@@ -6,7 +6,7 @@ const ProfileInfo = (props) => {
     return (
         <div className={style['user-info']}>
             <ProfilePhoto url={props.userInfo.photos.large} />
-            <ProfileDetail {...props.userInfo} setUserStatus={props.setUserStatus}/>
+            <ProfileDetail {...props.userInfo} status={props.status} setUserStatus={props.setUserStatus}/>
         </div>
     )
 }

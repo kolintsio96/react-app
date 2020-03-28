@@ -10,7 +10,7 @@ const Profile = (props) => {
     return (
         <div className={style.profile}>
             <Banner banner={props.bannerUrl} />
-            <ProfileInfo userInfo={props.profile} setUserStatus={props.setStatus} />
+            <ProfileInfo userInfo={props.profile} setUserStatus={props.setStatus} status={props.status} />
             <Posts
                 posts={props.posts}
                 postPhoto={props.profile.photos.large}

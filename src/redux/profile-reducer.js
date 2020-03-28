@@ -26,16 +26,17 @@ export let getUserStatus = (userId) => {
     return (dispatch) => {
         profileAPI.getUserStatus(userId)
             .then(response => {
-                let status = response ? response : '';
-                dispatch(setUserStatus(status));
+                dispatch(setUserStatus(response));
             })
     }
 };
 export let setStatus = (status) => {
     return (dispatch) => {
         profileAPI.setUserStatus(status)
-            .then(() => {
-                dispatch(setUserStatus(status));
+            .then((response) => {
+                if(response.resultCode === 0){
+                    dispatch(setUserStatus(status));
+                }
             })
     }
 };
@@ -82,13 +83,13 @@ let initialState = {
             "lookingForAJobDescription": null,
             "fullName": null,
             "userId": 6039,
-            'status': null,
             "photos": {
                 "small": null,
                 "large": null
             }
         },
-        bannerUrl: banner
+        bannerUrl: banner,
+        status: '',
     };
 
 let profileReducer = (state = initialState, action) => {
@@ -144,10 +145,7 @@ let profileReducer = (state = initialState, action) => {
         case SET_USER_STATUS: {
             return {
                 ...state,
-                profile:{
-                    ...state.profile,
-                    status: action.status
-                }
+                status: action.status
             };
         }
         default: {

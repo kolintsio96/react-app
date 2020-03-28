@@ -12,7 +12,7 @@ import React from "react";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {getUserId, isAuth} from "../../../redux/selectors/auth-selectors";
-import {getBanner, getPosts, getProfile} from "../../../redux/selectors/profile-selectors";
+import {getBanner, getPosts, getProfile, getStatus} from "../../../redux/selectors/profile-selectors";
 
 class ProfileClassContainer extends React.Component {
     componentDidMount() {
@@ -29,7 +29,7 @@ class ProfileClassContainer extends React.Component {
     }
 
     render() {
-        return <Profile {...this.props}/>
+        return <Profile {...this.props} status={this.props.status} setStatus={this.props.setStatus}/>
     }
 }
 
@@ -37,6 +37,7 @@ let mapStateToProps = (state) => {
     return {
         bannerUrl: getBanner(state),
         profile: getProfile(state),
+        status: getStatus(state),
         posts: getPosts(state),
         isAuth: isAuth(state),
         authorizedUserId: getUserId(state)
