@@ -2,7 +2,7 @@ import React from 'react';
 import style from './index.module.scss'
 import PostsForm from "./form/form";
 import Post from "./post/post";
-const Posts = (props) => {
+const Posts = React.memo((props) => {
     let postsElements = props.posts.map(el => <Post addLike={props.addLike} photo={props.postPhoto} message = {el.message} likes = {el.likes} id={el.id} key={el.id}/>);
     return (
         <div className={style.posts}>
@@ -13,5 +13,19 @@ const Posts = (props) => {
             </div>
         </div>
     )
-}
+});
+
+// class Posts extends React.Component{
+//     shouldComponentUpdate(nextProps, nextState, nextContext) {
+//         return nextProps !== this.props || nextState !== this.state;
+//     }
+//     render() {}
+// }
+//
+// class Posts extends React.PureComponent{
+//     render() {}
+// }
+
+//React.memo == React.PureComponent == shouldComponentUpdate
+//https://ru.reactjs.org/docs/react-api.html
 export default Posts
