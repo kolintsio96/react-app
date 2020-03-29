@@ -16,7 +16,6 @@ const Profile = (props) => {
                 postPhoto={props.profile.photos.large}
                 addLike={props.addLike}
                 addPost={props.addPost}
-                changeText={props.changeText}
             />
         </div>
     )

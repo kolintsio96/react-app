@@ -8,5 +8,5 @@ export const getStatus = state => {
     return state.profilePage.status;
 };
 export const getPosts = state => {
-    return state.profilePage.post.posts;
+    return state.profilePage.posts;
 };

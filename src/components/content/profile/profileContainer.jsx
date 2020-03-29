@@ -1,7 +1,6 @@
 import Profile from "./index";
 import {
     addPost,
-    changeText,
     addLike,
     getProfileData,
     getUserStatus,
@@ -49,4 +48,4 @@ let mapStateToProps = (state) => {
         authorizedUserId: getUserId(state)
     }
 };
-export default compose(withRouter, connect(mapStateToProps, {addPost, changeText, addLike, getProfileData, getUserStatus, setStatus}))(ProfileClassContainer)
+export default compose(withRouter, connect(mapStateToProps, {addPost, addLike, getProfileData, getUserStatus, setStatus}))(ProfileClassContainer)

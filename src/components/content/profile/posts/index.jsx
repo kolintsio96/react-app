@@ -14,18 +14,4 @@ const Posts = React.memo((props) => {
         </div>
     )
 });
-
-// class Posts extends React.Component{
-//     shouldComponentUpdate(nextProps, nextState, nextContext) {
-//         return nextProps !== this.props || nextState !== this.state;
-//     }
-//     render() {}
-// }
-//
-// class Posts extends React.PureComponent{
-//     render() {}
-// }
-
-//React.memo == React.PureComponent == shouldComponentUpdate
-//https://ru.reactjs.org/docs/react-api.html
 export default Posts
