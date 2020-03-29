@@ -1,6 +1,6 @@
 import React from "react";
 import style from './../profileInfo/profileDetail/index.module.scss'
-class ProfileStatus extends React.Component{
+class ProfileStatusClass extends React.Component{
     state = {
         editMode: false,
         status: this.props.status
@@ -46,4 +46,4 @@ class ProfileStatus extends React.Component{
 
 }
 
-export default ProfileStatus
+export default ProfileStatusClass

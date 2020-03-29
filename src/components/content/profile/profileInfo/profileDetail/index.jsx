@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './index.module.scss'
-import ProfileStatus from "../../status";
+import ProfileStatus from "../../status/ProfileStatusWithHooks";
 const ProfileDetail = (props) => {
     return (
         <div className={style['user-info__detail']}>
