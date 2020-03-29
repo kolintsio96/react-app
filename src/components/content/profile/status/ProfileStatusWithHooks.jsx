@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import style from './../profileInfo/profileDetail/index.module.scss'
 const ProfileStatus = (props) => {
     let [status, setStatus] = useState(props.status);
@@ -13,6 +13,9 @@ const ProfileStatus = (props) => {
         setEditMode(false);
         props.setUserStatus(status);
     };
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status]);
     return (
         <div className={style['user-info__status']}>
             {
