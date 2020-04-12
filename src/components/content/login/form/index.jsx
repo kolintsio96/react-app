@@ -1,25 +1,18 @@
 import React from "react";
 import style from './../index.module.scss';
 import styleForm from './../../../common/formController/index.module.scss';
-import {Field, reduxForm} from "redux-form";
-import {Checkbox, Input} from "../../../common/formController/formController";
+import {reduxForm} from "redux-form";
+import {Checkbox, createCheckbox, createField, Input} from "../../../common/formController/formController";
 import {required} from "../../../../utils/validation";
 
-const LoginForm = (props) => {
-    return <form className={style['login__form']} onSubmit={props.handleSubmit}>
-        <div className={style['login__label']}>
-            <Field className={style['login__field']} name={'email'} component={Input} validate={[required]} placeholder={'Login'} type={'text'}/>
-        </div>
-        <div className={style['login__label']}>
-            <Field className={style['login__field']} name={'password'} component={Input} validate={[required]} placeholder={'Password'} type={'password'}/>
-        </div>
-        <label className={style['login__label'] + ' ' + style['checkbox']}>
-            <Field className={style['login__checkbox']} name={'rememberMe'} component={Checkbox}  type={'checkbox'}/>
-            <span>remember me</span>
-        </label>
+const LoginForm = ({handleSubmit,error}) => {
+    return <form className={style['login__form']} onSubmit={handleSubmit}>
+        {createField('email', Input, [required], 'Login', {type:'text'})}
+        {createField('password', Input, [required], 'Password', {type:'password'})}
+        {createCheckbox('rememberMe', Checkbox, [], null, {type: 'checkbox'}, 'remember me')}
         {
-            props.error &&
-                <div className={styleForm['form-summary-error']}>{props.error}</div>
+            error &&
+                <div className={styleForm['form-summary-error']}>{error}</div>
         }
         <div className={style['login__label']}>
             <button className={style['login__button']}>Submit</button>

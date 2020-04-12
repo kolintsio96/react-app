@@ -1,6 +1,6 @@
 import {getAuthInfo} from "./auth-reducer";
 
-const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
+const INITIALIZED_SUCCESS = '/app/INITIALIZED_SUCCESS';
 let initialState = {
     initialized: false
 };
@@ -8,12 +8,10 @@ let initialState = {
 let setInitializedSuccess = () => ({type: INITIALIZED_SUCCESS});
 
 export let initializationApp = () => {
-    return (dispatch) => {
+    return async (dispatch) => {
         let loginPromise = dispatch(getAuthInfo());
-        Promise.all([loginPromise])
-            .then(() => {
-                dispatch(setInitializedSuccess());
-            })
+        await Promise.all([loginPromise])
+        dispatch(setInitializedSuccess());
     }
 };
 

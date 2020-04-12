@@ -2,11 +2,11 @@ import postsAvatar from "../img/post--avatar.png";
 import banner from "../img/banner.jpg";
 import {profileAPI} from "../api";
 
-const ADD_POST = 'ADD-POST',
-    ADD_LIKE = 'ADD-LIKE',
-    DELETE_POST = 'DELETE-LIKE',
-    SET_PROFILE = 'SET_PROFILE',
-    SET_USER_STATUS = 'SET_USER_STATUS';
+const ADD_POST = '/profile/ADD-POST',
+    ADD_LIKE = '/profile/ADD-LIKE',
+    DELETE_POST = '/profile/DELETE-LIKE',
+    SET_PROFILE = '/profile/SET_PROFILE',
+    SET_USER_STATUS = '/profile/SET_USER_STATUS';
 
 export let addPost = (data) => ({type: ADD_POST, data});
 export let deletePost = (postId) => ({type: DELETE_POST, postId});
@@ -15,29 +15,23 @@ export let setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 export let addLike = (id) => ({type: ADD_LIKE, id: id});
 
 export let getProfileData = (userId) => {
-    return (dispatch) => {
-        profileAPI.getProfileData(userId)
-            .then(response => {
-                dispatch(setProfile(response));
-            })
+    return async (dispatch) => {
+        let response = await profileAPI.getProfileData(userId);
+        dispatch(setProfile(response));
     }
 };
 export let getUserStatus = (userId) => {
-    return (dispatch) => {
-        profileAPI.getUserStatus(userId)
-            .then(response => {
-                dispatch(setUserStatus(response));
-            })
+    return async (dispatch) => {
+        let response = await profileAPI.getUserStatus(userId);
+        dispatch(setUserStatus(response));
     }
 };
 export let setStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.setUserStatus(status)
-            .then((response) => {
-                if (response.resultCode === 0) {
-                    dispatch(setUserStatus(status));
-                }
-            })
+    return async (dispatch) => {
+        let response = await profileAPI.setUserStatus(status);
+        if (response.resultCode === 0) {
+            dispatch(setUserStatus(status));
+        }
     }
 };
 

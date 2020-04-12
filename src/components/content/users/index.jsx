@@ -1,32 +1,20 @@
 import React from 'react';
 import style from './index.module.scss';
 import User from "./user";
+import Pagination from "../../common/Pagination";
 
-let Users = (props) => {
-    let count = props.pagination.total / props.pagination.limit,
-        pages = [];
-    for (let i = 1; i <= count; i++) {
-        pages.push(i);
-    }
-    let mapUsers = props.users.map(user => {
+let Users = ({users,pagination,changePage, ...props}) => {
+    let mapUsers = users.map(user => {
         return <User key={user.id} id={user.id} user={user} followingUser={props.followingUser} inProgressFollowing={props.inProgressFollowing}/>
     });
-    let mapPagination = pages.map(p => {
-        return <span key={p}
-                     className={props.pagination.current === p ? `${style['pagination__item']} ${style['pagination__item_active']}` : style['pagination__item']}
-                     onClick={() => {props.changePage(p)}}>{p}</span>
-    });
-
     return (
         <div className={style.users}>
             <h2 className={style['users__title']}>Users</h2>
-            <div className={style.pagination}>
-                {mapPagination}
+            <Pagination total={pagination.total} limit={pagination.limit} current={pagination.current} changePage={changePage}/>
+            <div>
+                {mapUsers}
             </div>
-            {mapUsers}
-            <div className={style.pagination}>
-                {mapPagination}
-            </div>
+            <Pagination total={pagination.total} limit={pagination.limit} current={pagination.current} changePage={changePage}/>
         </div>
     )
 }

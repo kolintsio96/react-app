@@ -20,7 +20,8 @@ class UserContainer extends React.Component {
         this.props.getUsers(page, this.props.pagination.limit);
     };
     componentDidMount() {
-        this.props.getUsers(1, this.props.pagination.limit);
+        let {pagination} = this.props;
+        this.props.getUsers(pagination.current, pagination.limit);
     }
 
     render() {
