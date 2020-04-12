@@ -10,11 +10,10 @@ let Users = ({users,pagination,changePage, ...props}) => {
     return (
         <div className={style.users}>
             <h2 className={style['users__title']}>Users</h2>
-            <Pagination total={pagination.total} limit={pagination.limit} current={pagination.current} changePage={changePage}/>
-            <div>
+            <div className={style['users__container']}>
                 {mapUsers}
             </div>
-            <Pagination total={pagination.total} limit={pagination.limit} current={pagination.current} changePage={changePage}/>
+            <Pagination totalItems={pagination.total} pageSize={pagination.limit} currentPage={pagination.current} handleEvent={changePage}/>
         </div>
     )
 }

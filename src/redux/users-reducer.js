@@ -43,7 +43,7 @@ let initialState = {
     pagination:{
         total:0,
         current:1,
-        limit: 100
+        limit: 10
     },
     isFetching: false,
     inProgressFollowing: [],
