@@ -5,11 +5,12 @@ import Content from "./components/content";
 import HeaderContainer from "./components/header/headerContainer";
 import SidebarContainer from "./components/sidebar/sidebarContainer";
 import {compose} from "redux";
-import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
+import {BrowserRouter, withRouter} from "react-router-dom";
+import {connect, Provider} from "react-redux";
 import {initializationApp} from "./redux/app-reducer";
 import Preloader from "./components/common/preloader";
 import {getInit} from "./redux/selectors/app-selectors";
+import store from "./redux/redux-store";
 
 class App extends React.Component{
     componentDidMount() {
@@ -35,4 +36,14 @@ const mapStateToProps = (state) => {
         initialized: getInit(state)
     }
 }
-export default compose(withRouter, connect(mapStateToProps , {initializationApp}))(App);
+let AppContainer = compose(withRouter, connect(mapStateToProps , {initializationApp}))(App);
+let SocialApp = () => {
+    return(
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </BrowserRouter>
+    )
+};
+export default SocialApp;

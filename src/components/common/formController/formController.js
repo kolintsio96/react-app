@@ -41,7 +41,7 @@ export const Checkbox = (props) => {
 export const createField = (name, component, validator, placeholder, props = {}) => {
     return (
         <div className={styleLogin['login__label']}>
-            <Field className={styleLogin['login__field']} name={name} component={component} validate={validator} placeholder={validator} {...props}/>
+            <Field className={styleLogin['login__field']} name={name} component={component} validate={validator} placeholder={placeholder} {...props}/>
         </div>
     )
 };
