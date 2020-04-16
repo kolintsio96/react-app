@@ -5,7 +5,7 @@ import Content from "./components/content";
 import HeaderContainer from "./components/header/headerContainer";
 import SidebarContainer from "./components/sidebar/sidebarContainer";
 import {compose} from "redux";
-import {BrowserRouter, withRouter} from "react-router-dom";
+import {HashRouter, withRouter} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import {initializationApp} from "./redux/app-reducer";
 import Preloader from "./components/common/preloader";
@@ -39,11 +39,11 @@ const mapStateToProps = (state) => {
 let AppContainer = compose(withRouter, connect(mapStateToProps , {initializationApp}))(App);
 let SocialApp = () => {
     return(
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 };
 export default SocialApp;
