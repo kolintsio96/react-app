@@ -1,6 +1,7 @@
 import postsAvatar from "../img/post--avatar.png";
 import banner from "../img/banner.jpg";
 import {profileAPI} from "../api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = '/profile/ADD-POST',
     ADD_LIKE = '/profile/ADD-LIKE',
@@ -41,6 +42,52 @@ export let setProfilePhoto = (photoFile) => {
         let response = await profileAPI.setProfilePhoto(photoFile);
         if (response.resultCode === 0) {
             dispatch(setUserPhoto(response.data.photos));
+        }
+    }
+};
+export let saveProfileData = (profile) => {
+    return async (dispatch, getState) => {
+        let userId = getState().auth.userId;
+        let response = await profileAPI.saveProfileData(profile);
+        if (response.resultCode === 0) {
+            dispatch(getProfileData(userId));
+        }else{
+            let contactsError = {contacts: {}};
+            if(response.messages.length){
+                response.messages.forEach((error, index) => {
+                    if(error.toLowerCase().indexOf('facebook') !== -1){
+                        contactsError.contacts['facebook'] = response.messages[index]
+                    }else if(error.toLowerCase().indexOf('website') !== -1){
+                        contactsError.contacts['website'] = response.messages[index]
+                    }
+                    else if(error.toLowerCase().indexOf('vk') !== -1){
+                        contactsError.contacts['vk'] = response.messages[index]
+                    }
+                    else if(error.toLowerCase().indexOf('twitter') !== -1){
+                        contactsError.contacts['twitter'] = response.messages[index]
+                    }
+                    else if(error.toLowerCase().indexOf('instagram') !== -1){
+                        contactsError.contacts['instagram'] = response.messages[index]
+                    }
+                    else if(error.toLowerCase().indexOf('youtube') !== -1){
+                        contactsError.contacts['youtube'] = response.messages[index]
+                    }
+                    else if(error.toLowerCase().indexOf('github') !== -1){
+                        contactsError.contacts['github'] = response.messages[index]
+                    }
+                    else if(error.toLowerCase().indexOf('mainlink') !== -1){
+                        contactsError.contacts['mainLink'] = response.messages[index]
+                    }else if(error.toLowerCase().indexOf('fullname') !== -1){
+                        contactsError['fullName'] = response.messages[index]
+                    }else if(error.toLowerCase().indexOf('aboutme') !== -1){
+                        contactsError['aboutMe'] = response.messages[index]
+                    }else if(error.toLowerCase().indexOf('lookingforajobdescription') !== -1){
+                        contactsError['lookingForAJobDescription'] = response.messages[index]
+                    }
+                })
+            }
+            dispatch(stopSubmit('profileEdit', contactsError));
+            return Promise.reject(response.messages[0])
         }
     }
 };

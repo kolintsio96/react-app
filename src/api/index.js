@@ -42,6 +42,10 @@ export const profileAPI = {
             }
         })
             .then(response => response.data)
+    },
+    saveProfileData(profile){
+        return instanse.put(`/profile`, profile)
+            .then(response => response.data)
     }
 
 };

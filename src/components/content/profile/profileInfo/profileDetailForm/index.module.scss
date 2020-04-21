@@ -1,0 +1,15 @@
+.profile-form{
+  max-width: 500px;
+  &__desc{
+    margin-bottom: 15px;
+  }
+  &__save{
+    width: 100px;
+    height: 30px;
+    background-color: #68ffcd;
+    cursor: pointer;
+  }
+  &__contacts{
+    margin-top: 20px;
+  }
+}

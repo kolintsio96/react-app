@@ -4,7 +4,7 @@ import {
     addLike,
     getProfileData,
     getUserStatus,
-    setStatus, setProfilePhoto
+    setStatus, setProfilePhoto, saveProfileData
 } from "../../../redux/profile-reducer";
 import {connect} from "react-redux";
 import React from "react";
@@ -43,7 +43,7 @@ class ProfileClassContainer extends React.Component {
     }
 
     render() {
-        return <Profile {...this.props} status={this.props.status} setStatus={this.props.setStatus} setProfilePhoto={this.props.setProfilePhoto} isOwner={this.isOwner()}/>
+        return <Profile {...this.props} status={this.props.status} setStatus={this.props.setStatus} setProfilePhoto={this.props.setProfilePhoto} saveProfileData={this.props.saveProfileData} isOwner={this.isOwner()}/>
     }
 }
 
@@ -57,4 +57,4 @@ let mapStateToProps = (state) => {
         authorizedUserId: getUserId(state),
     }
 };
-export default compose(withRouter, connect(mapStateToProps, {addPost, addLike, getProfileData, getUserStatus, setStatus, setProfilePhoto}))(ProfileClassContainer)
+export default compose(withRouter, connect(mapStateToProps, {addPost, addLike, getProfileData, getUserStatus, setStatus, setProfilePhoto, saveProfileData}))(ProfileClassContainer)

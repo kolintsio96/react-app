@@ -1,5 +1,5 @@
 .posts{
-  max-width: 95%;
+  max-width: calc(100% - 40px);
   margin: 0 auto;
   padding-bottom: 20px;
   &__title{
