@@ -58,9 +58,14 @@ export const authAPI = {
         return instanse.post(`/auth/login`, data)
             .then(response => response.data)
     },
-    logout(data){
+    logout(){
         return instanse.delete(`/auth/login`)
             .then(response => response.data)
-    },
-
+    }
+};
+export const securityAPI = {
+    getCaptchaUrl(){
+        return instanse.get(`security/get-captcha-url`)
+            .then(response => response.data)
+    }
 };

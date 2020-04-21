@@ -6,7 +6,7 @@ const ProfileInfo = ({userInfo, status, setUserStatus, isOwner, setProfilePhoto,
     return (
         <div className={style['user-info']}>
             <ProfilePhoto setProfilePhoto={setProfilePhoto} isOwner={isOwner} url={userInfo.photos.large} />
-            <ProfileDetail saveProfileData={saveProfileData} userInfo={userInfo} isOwner={isOwner} status={status} setUserStatus={setUserStatus}/>
+            <ProfileDetail saveProfileData={saveProfileData} userInfo={userInfo} isOwner={isOwner} status={status} setUserStatus={setUserStatus} />
         </div>
     )
 }

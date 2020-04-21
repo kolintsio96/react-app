@@ -4,6 +4,9 @@ export const getUserId = state => {
 export const isAuth = state => {
     return state.auth.isAuth;
 };
+export const getCaptcha = state => {
+    return state.auth.captchaUrl;
+};
 export const userEmail = state => {
     return state.auth.email;
 };

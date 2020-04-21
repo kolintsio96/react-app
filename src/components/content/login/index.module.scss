@@ -1,5 +1,11 @@
 .login{
   padding: 20px;
+  &__captcha{
+    margin-bottom: 20px;
+    img{
+      margin-bottom: 5px;
+    }
+  }
   &__title{
     font-size: 28px;
     margin-bottom: 40px;
