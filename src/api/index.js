@@ -32,6 +32,16 @@ export const profileAPI = {
     getUserStatus(userId){
         return instanse.get(`/profile/status/${userId}`)
             .then(response => response.data)
+    },
+    setProfilePhoto(photoFile){
+        let formData = new FormData();
+        formData.append('image', photoFile)
+        return instanse.put(`/profile/photo`, formData, {
+            headers:{
+                'Content-Type':'multipart/form-data'
+            }
+        })
+            .then(response => response.data)
     }
 
 };

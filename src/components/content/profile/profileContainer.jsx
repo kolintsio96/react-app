@@ -4,7 +4,7 @@ import {
     addLike,
     getProfileData,
     getUserStatus,
-    setStatus
+    setStatus, setProfilePhoto
 } from "../../../redux/profile-reducer";
 import {connect} from "react-redux";
 import React from "react";
@@ -14,7 +14,10 @@ import {getUserId, isAuth} from "../../../redux/selectors/auth-selectors";
 import {getBanner, getPosts, getProfile, getStatus} from "../../../redux/selectors/profile-selectors";
 
 class ProfileClassContainer extends React.Component {
-    componentDidMount() {
+    isOwner(){
+        return !this.props.match.params.userId || parseInt(this.props.match.params.userId) === parseInt(this.props.authorizedUserId);
+    }
+    refreshProfile() {
         let userId = this.props.match.params.userId;
         if(!userId){
             userId = this.props.authorizedUserId;
@@ -26,15 +29,21 @@ class ProfileClassContainer extends React.Component {
         this.props.getProfileData(userId);
         this.props.getUserStatus(userId);
     }
+    componentDidMount() {
+        this.refreshProfile();
+    }
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.authorizedUserId !== this.props.authorizedUserId && this.props.authorizedUserId === null){
             this.props.history.push('/login');
             return;
         }
+        if(this.props.match.params.userId !== prevProps.match.params.userId){
+            this.refreshProfile();
+        }
     }
 
     render() {
-        return <Profile {...this.props} status={this.props.status} setStatus={this.props.setStatus}/>
+        return <Profile {...this.props} status={this.props.status} setStatus={this.props.setStatus} setProfilePhoto={this.props.setProfilePhoto} isOwner={this.isOwner()}/>
     }
 }
 
@@ -45,7 +54,7 @@ let mapStateToProps = (state) => {
         status: getStatus(state),
         posts: getPosts(state),
         isAuth: isAuth(state),
-        authorizedUserId: getUserId(state)
+        authorizedUserId: getUserId(state),
     }
 };
-export default compose(withRouter, connect(mapStateToProps, {addPost, addLike, getProfileData, getUserStatus, setStatus}))(ProfileClassContainer)
+export default compose(withRouter, connect(mapStateToProps, {addPost, addLike, getProfileData, getUserStatus, setStatus, setProfilePhoto}))(ProfileClassContainer)

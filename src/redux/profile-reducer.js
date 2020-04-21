@@ -6,12 +6,14 @@ const ADD_POST = '/profile/ADD-POST',
     ADD_LIKE = '/profile/ADD-LIKE',
     DELETE_POST = '/profile/DELETE-LIKE',
     SET_PROFILE = '/profile/SET_PROFILE',
+    SET_USER_PHOTO = '/profile/SET_USER_PHOTO',
     SET_USER_STATUS = '/profile/SET_USER_STATUS';
 
 export let addPost = (data) => ({type: ADD_POST, data});
 export let deletePost = (postId) => ({type: DELETE_POST, postId});
 export let setProfile = (profile) => ({type: SET_PROFILE, profile});
 export let setUserStatus = (status) => ({type: SET_USER_STATUS, status});
+export let setUserPhoto = (photos) => ({type: SET_USER_PHOTO, photos});
 export let addLike = (id) => ({type: ADD_LIKE, id: id});
 
 export let getProfileData = (userId) => {
@@ -31,6 +33,14 @@ export let setStatus = (status) => {
         let response = await profileAPI.setUserStatus(status);
         if (response.resultCode === 0) {
             dispatch(setUserStatus(status));
+        }
+    }
+};
+export let setProfilePhoto = (photoFile) => {
+    return async (dispatch) => {
+        let response = await profileAPI.setProfilePhoto(photoFile);
+        if (response.resultCode === 0) {
+            dispatch(setUserPhoto(response.data.photos));
         }
     }
 };
@@ -127,6 +137,12 @@ let profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 status: action.status
+            };
+        }
+        case SET_USER_PHOTO: {
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
             };
         }
         default: {

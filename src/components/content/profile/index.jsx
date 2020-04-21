@@ -5,12 +5,12 @@ import ProfileInfo from "./profileInfo";
 import Posts from "./posts";
 import Preloader from "../../common/preloader";
 
-const Profile = ({profile, bannerUrl, setStatus, status, posts, addLike, addPost}) => {
+const Profile = ({profile, bannerUrl, setStatus, status, posts, addLike, addPost, isOwner, setProfilePhoto}) => {
     if (!profile) return <Preloader/>;
     return (
         <div className={style.profile}>
             <Banner banner={bannerUrl} />
-            <ProfileInfo userInfo={profile} setUserStatus={setStatus} status={status} />
+            <ProfileInfo setProfilePhoto={setProfilePhoto} userInfo={profile} setUserStatus={setStatus} status={status} isOwner={isOwner} />
             <Posts
                 posts={posts}
                 postPhoto={profile.photos.large}

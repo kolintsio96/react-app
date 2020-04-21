@@ -4,7 +4,7 @@ const ProfileStatus = (props) => {
     let [status, setStatus] = useState(props.status);
     let [editMode, setEditMode] = useState(false);
     const activeEditMode = () => {
-        setEditMode(true);
+        if(props.isOwner) setEditMode(true);
     };
     const changeStatus = (e) => {
         setStatus(e.currentTarget.value);
@@ -23,7 +23,7 @@ const ProfileStatus = (props) => {
                 <span onDoubleClick={activeEditMode}>{props.status || '-----'}</span>
             }
             {
-                editMode &&
+                editMode && props.isOwner &&
                 <input onChange={changeStatus} autoFocus={true} onBlur={disableEditMode} value={status} type="text"/>
             }
         </div>

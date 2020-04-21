@@ -1,9 +1,31 @@
-.profile-photo{
-  grid-area: avatar;
-  border-radius: 50%;
-  overflow: hidden;
-  img{
-    max-width: 100%;
-    display: block;
+.profile{
+  &-photo{
+    grid-area: avatar;
+    position: relative;
+    img{
+      max-width: 100%;
+      display: block;
+      border-radius: 50%;
+    }
+  }
+  &-load{
+    position: absolute;
+    top: 7px;
+    right: 21px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    input{
+      display: none;
+    }
+    &__icon{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
   }
 }
