@@ -31,9 +31,13 @@ export let getUserStatus = (userId) => {
 };
 export let setStatus = (status) => {
     return async (dispatch) => {
-        let response = await profileAPI.setUserStatus(status);
-        if (response.resultCode === 0) {
-            dispatch(setUserStatus(status));
+        try {
+            let response = await profileAPI.setUserStatus(status);
+            if (response.resultCode === 0) {
+                dispatch(setUserStatus(status));
+            }
+        }catch (e) {
+            // alert error
         }
     }
 };

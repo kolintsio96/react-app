@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import style from './index.module.scss';
+import cn from 'classnames';
 
 let Pagination = ({totalItems, pageSize, currentPage, handleEvent, sizeStep=15}) => {
     let countPages = totalItems / pageSize,
@@ -17,7 +18,7 @@ let Pagination = ({totalItems, pageSize, currentPage, handleEvent, sizeStep=15})
         .map(p => {
         return (
             <span key={p}
-                  className={currentPage === p ? `${style['pagination__item']} ${style['pagination__item_active']}` : style['pagination__item']}
+                  className={cn(style['pagination__item'], {[style['pagination__item_active']]:currentPage === p})}
                   onClick={() => {handleEvent(p)}}>{p}</span>
         )
     });

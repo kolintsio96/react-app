@@ -1,11 +1,10 @@
 import React from 'react';
-import style from './index.module.scss'
-import Footer from "./components/footer";
+import style from './index.module.scss';
 import Content from "./components/content";
 import HeaderContainer from "./components/header/headerContainer";
 import SidebarContainer from "./components/sidebar/sidebarContainer";
 import {compose} from "redux";
-import {HashRouter, withRouter} from "react-router-dom";
+import {BrowserRouter, withRouter} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import {initializationApp} from "./redux/app-reducer";
 import Preloader from "./components/common/preloader";
@@ -13,8 +12,16 @@ import {getInit} from "./redux/selectors/app-selectors";
 import store from "./redux/redux-store";
 
 class App extends React.Component{
+    catchAllUnhandledErrors = (reason, promise) => {
+        console.error(reason);
+        console.error(promise);
+    }
     componentDidMount() {
         this.props.initializationApp();
+        window.addEventListener('unhandledrejection', this.catchAllUnhandledErrors)
+    }
+    componentWillUnmount() {
+        window.removeEventListener('unhandledrejection', this.catchAllUnhandledErrors)
     }
 
     render() {
@@ -26,7 +33,6 @@ class App extends React.Component{
                 <HeaderContainer/>
                 <SidebarContainer/>
                 <Content/>
-                <Footer/>
             </div>
         );
     }
@@ -39,11 +45,11 @@ const mapStateToProps = (state) => {
 let AppContainer = compose(withRouter, connect(mapStateToProps , {initializationApp}))(App);
 let SocialApp = () => {
     return(
-        <HashRouter>
+        <BrowserRouter>
             <Provider store={store}>
                 <AppContainer/>
             </Provider>
-        </HashRouter>
+        </BrowserRouter>
     )
 };
 export default SocialApp;
