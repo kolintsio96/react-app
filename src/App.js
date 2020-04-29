@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Profiler} from 'react';
 import style from './index.module.scss';
 import Content from "./components/content";
 import HeaderContainer from "./components/header/headerContainer";
@@ -44,12 +44,26 @@ const mapStateToProps = (state) => {
 }
 let AppContainer = compose(withRouter, connect(mapStateToProps , {initializationApp}))(App);
 let SocialApp = () => {
+    function onRenderCallback(
+        id, // проп "id" из дерева компонента Profiler, для которого было зафиксировано изменение
+        phase, // либо "mount" (если дерево было смонтировано), либо "update" (если дерево было повторно отрендерено)
+        actualDuration, // время, затраченное на рендер зафиксированного обновления
+        baseDuration, // предполагаемое время рендера всего поддерева без кеширования
+        startTime, // когда React начал рендерить это обновление
+        commitTime, // когда React зафиксировал это обновление
+        interactions // Множество «взаимодействий» для данного обновления
+    ) {
+        // Обработка или логирование результатов...
+        // https://ru.reactjs.org/docs/profiler.html
+    }
     return(
-        <BrowserRouter>
-            <Provider store={store}>
-                <AppContainer/>
-            </Provider>
-        </BrowserRouter>
+        <Profiler id='app' onRender={onRenderCallback}>
+            <BrowserRouter>
+                <Provider store={store}>
+                    <AppContainer/>
+                </Provider>
+            </BrowserRouter>
+        </Profiler>
     )
 };
 export default SocialApp;
