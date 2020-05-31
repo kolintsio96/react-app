@@ -14,7 +14,7 @@ const Content = () => {
                     <Route exact path = '/' render={() => <Redirect to={'/profile'}/>}/>
                     <Route path = '/profile/:userId?' render={withSuspense(ProfileContainer)}/>
                     <Route path = '/messages' render={withSuspense(MessagesContainer)}/>
-                    <Route path = '/users' render={() => <UsersContainer/>}/>
+                    <Route path = '/users' render={() => <UsersContainer title={'Users'}/>}/>
                     <Route path = '/login' render={withSuspense(Login)}/>
                     <Route path = '*' render={() => <NotFound/>}/>
                 </Switch>
